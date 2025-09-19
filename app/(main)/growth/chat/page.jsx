@@ -6,7 +6,8 @@ import { growthChat, createNewSession } from "@/actions/growth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { RotateCcw, MessageSquare } from "lucide-react";
+import { RotateCcw, MessageSquare, Mic, MicOff } from "lucide-react";
+import VoiceChat from "./_components/voice-chat";
 
 export default function GrowthChatPage() {
   const [messages, setMessages] = useState([
@@ -19,6 +20,7 @@ export default function GrowthChatPage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [sessionId, setSessionId] = useState(null);
+  const [chatMode, setChatMode] = useState("text"); // "text" or "voice"
   const listRef = useRef(null);
 
   // Initialize session on component mount
@@ -76,6 +78,34 @@ export default function GrowthChatPage() {
     ]);
   };
 
+  const toggleChatMode = () => {
+    setChatMode(prev => prev === "text" ? "voice" : "text");
+  };
+
+  // Render voice chat mode
+  if (chatMode === "voice") {
+    return (
+      <div className="min-h-screen">
+        <div className="absolute top-4 right-4 z-50">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={toggleChatMode}
+            className="flex items-center gap-2 bg-background/80 backdrop-blur-sm"
+          >
+            <MessageSquare className="h-4 w-4" />
+            Text Chat
+          </Button>
+        </div>
+        <VoiceChat 
+          sessionId={sessionId} 
+          onNewSession={startNewSession}
+        />
+      </div>
+    );
+  }
+
+  // Render text chat mode
   return (
     <div className="container mx-auto px-4 pb-24 pt-28 max-w-3xl">
       <div className="flex items-center justify-between mb-4">
@@ -85,15 +115,26 @@ export default function GrowthChatPage() {
             Get tailored guidance to align your skills, goals, and learning path with your career.
           </p>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={startNewSession}
-          className="flex items-center gap-2"
-        >
-          <RotateCcw className="h-4 w-4" />
-          New Chat
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={toggleChatMode}
+            className="flex items-center gap-2"
+          >
+            <Mic className="h-4 w-4" />
+            Voice Chat
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={startNewSession}
+            className="flex items-center gap-2"
+          >
+            <RotateCcw className="h-4 w-4" />
+            New Chat
+          </Button>
+        </div>
       </div>
 
       <Card className="p-4 h-[60vh] overflow-y-auto" ref={listRef}>

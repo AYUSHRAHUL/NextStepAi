@@ -23,6 +23,7 @@ model User {
   assessments     Assessment[]
   resume          Resume?
   coverLetter     CoverLetter[]
+  roadmaps        Roadmap[]
 }
 
 model Assessment {
@@ -75,3 +76,34 @@ model IndustryInsight {
   lastUpdated       DateTime @default(now())
   nextUpdate        DateTime
 }
+
+model Roadmap {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String   @db.ObjectId
+  user           User     @relation(fields: [userId], references: [id])
+
+  title          String
+  targetRole     String
+  targetIndustry String?
+  content        String?   // summary/description
+
+  // Weeks/steps array as JSON to keep flexible shape returned by AI
+  steps          Json[]
+
+  // Extra detail sections - now structured objects
+  certifications Json[]   // Array of certification objects
+  projects       Json[]   // Array of project objects
+  networking     Json[]   // Array of networking objects
+  recommendedSkills Json[] // Array of skill objects
+
+  // 3D block metadata to support fancy UI (position/size/depth/colors)
+  blocks3d       Json[]
+
+  // Connection data for React Flow
+  connections    Json[]   // Array of connection objects
+
+  status         String   @default("pending")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+

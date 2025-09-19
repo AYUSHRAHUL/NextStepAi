@@ -87,6 +87,12 @@ export default async function Header() {
                     Growth Coach
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/growth/roadmap" className="flex items-center gap-2 hover:bg-accent transition-colors duration-200">
+                    <StarsIcon className="h-4 w-4" />
+                    Career Workflow
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </SignedIn>
