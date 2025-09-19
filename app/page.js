@@ -166,30 +166,43 @@ const faqs = [
   }
 ];
 
-const FloatingElements = () => (
-  <div className="fixed inset-0 pointer-events-none overflow-hidden">
-    {[...Array(25)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute w-3 h-3 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full"
-        initial={{
-          x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-          y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-        }}
-        animate={{
-          y: [null, -120, null],
-          opacity: [0, 1, 0],
-          scale: [0.5, 1, 0.5],
-        }}
-        transition={{
-          duration: Math.random() * 8 + 12,
-          repeat: Infinity,
-          delay: Math.random() * 6,
-        }}
-      />
-    ))}
-  </div>
-);
+const FloatingElements = () => {
+  // Use fixed values to prevent hydration mismatch
+  const fixedPositions = [
+    { x: 397, y: 505 }, { x: 188, y: 38 }, { x: 636, y: 18 }, { x: 593, y: 362 },
+    { x: 651, y: 366 }, { x: 421, y: 376 }, { x: 781, y: 163 }, { x: 629, y: 74 },
+    { x: 398, y: 135 }, { x: 862, y: 41 }, { x: 677, y: 30 }, { x: 867, y: 105 },
+    { x: 1002, y: 334 }, { x: 844, y: 99 }, { x: 424, y: 123 }, { x: 963, y: 486 },
+    { x: 884, y: 237 }, { x: 556, y: 588 }, { x: 85, y: 210 }, { x: 276, y: 358 },
+    { x: 37, y: 171 }, { x: 597, y: 101 }, { x: 575, y: 83 }, { x: 1116, y: 244 },
+    { x: 1108, y: 537 }
+  ];
+
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      {fixedPositions.map((pos, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-3 h-3 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full"
+          initial={{
+            x: pos.x,
+            y: pos.y,
+          }}
+          animate={{
+            y: [pos.y, pos.y - 120, pos.y],
+            opacity: [0, 1, 0],
+            scale: [0.5, 1, 0.5],
+          }}
+          transition={{
+            duration: 12 + (i * 0.3), // Use index-based duration instead of random
+            repeat: Infinity,
+            delay: i * 0.2, // Use index-based delay instead of random
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 const AnimatedCounter = ({ end, suffix = "" }) => {
   const [count, setCount] = React.useState(0);
@@ -784,24 +797,40 @@ export default function LandingPage() {
         
         {/* Advanced Animated Background */}
         <div className="absolute inset-0">
-          {[...Array(15)].map((_, i) => (
+          {[
+            { left: 52.67, top: 83.85, x: 20, y: 30 },
+            { left: 66.38, top: 93.48, x: -15, y: 25 },
+            { left: 86.94, top: 70.17, x: 30, y: -20 },
+            { left: 77.53, top: 71.26, x: -25, y: 15 },
+            { left: 18.97, top: 13.59, x: 35, y: 40 },
+            { left: 87.27, top: 17.09, x: -30, y: 20 },
+            { left: 2.86, top: 58.39, x: 25, y: -15 },
+            { left: 57.96, top: 29.85, x: -20, y: 35 },
+            { left: 16.32, top: 83.71, x: 40, y: -25 },
+            { left: 31.18, top: 4.80, x: -35, y: 30 },
+            { left: 51.57, top: 69.87, x: 15, y: -20 },
+            { left: 96.39, top: 86.05, x: -40, y: 10 },
+            { left: 28.09, top: 99.28, x: 30, y: -35 },
+            { left: 64.29, top: 2.33, x: -15, y: 45 },
+            { left: 33.39, top: 69.67, x: 25, y: -10 }
+          ].map((pos, i) => (
             <motion.div
               key={i}
               className="absolute w-40 h-40 bg-white/10 rounded-full blur-2xl"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${pos.left}%`,
+                top: `${pos.top}%`,
               }}
               animate={{
                 scale: [1, 2, 1],
                 opacity: [0.1, 0.3, 0.1],
-                x: [0, Math.random() * 100 - 50, 0],
-                y: [0, Math.random() * 100 - 50, 0],
+                x: [0, pos.x, 0],
+                y: [0, pos.y, 0],
               }}
               transition={{
-                duration: Math.random() * 8 + 10,
+                duration: 10 + (i * 0.5),
                 repeat: Infinity,
-                delay: Math.random() * 5,
+                delay: i * 0.3,
               }}
             />
           ))}

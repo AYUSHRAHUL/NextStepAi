@@ -20,7 +20,11 @@ import NextStepAiLogo from "./ui/logo";
 import { checkUser } from "@/lib/checkUser";
 
 export default async function Header() {
-  await checkUser();
+  try {
+    await checkUser();
+  } catch (error) {
+    console.error("Error checking user:", error);
+  }
 
   return (
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
