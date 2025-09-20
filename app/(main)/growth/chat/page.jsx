@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { growthChat, createNewSession } from "@/actions/growth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { RotateCcw, MessageSquare, Mic, MicOff, Volume2, VolumeX, Bot, User } from "lucide-react";
 import VoiceChat from "./_components/voice-chat";
 
@@ -173,11 +173,11 @@ export default function GrowthChatPage() {
 
     try {
       const response = await growthChat(message, sessionId);
-      const assistantMessage = { role: "assistant", content: response };
+      const assistantMessage = { role: "assistant", content: response.reply };
       setMessages((prev) => [...prev, assistantMessage]);
 
       if (speakReplies && supportsTTS) {
-        speak(response);
+        speak(response.reply);
       }
     } catch (error) {
       const errorMessage = {
