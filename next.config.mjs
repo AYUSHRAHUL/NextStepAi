@@ -8,6 +8,14 @@ const nextConfig = {
       },
     ],
   },
+  // Ensure proper handling of environment variables
+  env: {
+    CUSTOM_KEY: process.env.CUSTOM_KEY,
+  },
+  // Optimize for Vercel deployment
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client'],
+  },
 };
 
 export default nextConfig;

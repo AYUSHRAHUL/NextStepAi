@@ -27,4 +27,6 @@ export const config = {
     // Always run for API routes
     "/(api|trpc)(.*)",
   ],
+  // Ensure middleware runs on Vercel
+  runtime: 'nodejs',
 };
