@@ -23,7 +23,7 @@ export default async function Header() {
   try {
     await checkUser();
   } catch (error) {
-    console.error("Error checking user:", error);
+    // Handle error silently - user authentication will be handled by Clerk
   }
 
   return (

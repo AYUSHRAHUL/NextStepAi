@@ -35,7 +35,6 @@ export async function saveResume(content) {
     revalidatePath("/resume");
     return resume;
   } catch (error) {
-    console.error("Error saving resume:", error);
     throw new Error("Failed to save resume");
   }
 }
@@ -92,7 +91,6 @@ export async function improveWithAI({ current, type }) {
     const improvedContent = response.text().trim();
     return improvedContent;
   } catch (error) {
-    console.error("Error improving content:", error);
     throw new Error("Failed to improve content");
   }
 }
