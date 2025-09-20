@@ -7,8 +7,8 @@
 Go to your Vercel dashboard → Project Settings → Environment Variables and add:
 
 ```env
-# Database
-DATABASE_URL=your_mongodb_connection_string
+# Database (CRITICAL - Must be production MongoDB Atlas URL)
+DATABASE_URL=mongodb+srv://username:password@cluster.mongodb.net/database?retryWrites=true&w=majority
 
 # Clerk Authentication (CRITICAL)
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_your_production_key
@@ -67,6 +67,14 @@ After updating environment variables and Clerk settings:
 1. Check variable names match exactly (case-sensitive)
 2. Redeploy after adding variables
 3. Check Vercel function logs for errors
+
+### Issue 5: MongoDB Atlas Connection Error (CRITICAL)
+**Error**: `Server selection timeout: No available servers`
+**Solution**:
+1. **MongoDB Atlas Network Access**: Go to Network Access → Add IP Address → Allow Access from Anywhere (0.0.0.0/0)
+2. **Database User Permissions**: Ensure user has "Read and write to any database" permissions
+3. **Connection String**: Use production connection string with proper retry settings
+4. **Vercel Environment**: Make sure DATABASE_URL is set correctly in Vercel dashboard
 
 ## 📋 Pre-Deployment Checklist
 
