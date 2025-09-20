@@ -4,10 +4,19 @@ import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { generateAIInsights } from "./dashboard";
+import { userUpdateSchema, sanitizeInput } from "@/lib/validation";
 
 export async function updateUser(data) {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
+
+  // Validate and sanitize input
+  const validatedData = userUpdateSchema.parse({
+    industry: sanitizeInput(data.industry),
+    experience: data.experience,
+    bio: data.bio ? sanitizeInput(data.bio) : undefined,
+    skills: data.skills.map(skill => sanitizeInput(skill)),
+  });
 
   const user = await db.user.findUnique({
     where: { clerkUserId: userId },
@@ -22,17 +31,17 @@ export async function updateUser(data) {
         // First check if industry exists
         let industryInsight = await tx.industryInsight.findUnique({
           where: {
-            industry: data.industry,
+            industry: validatedData.industry,
           },
         });
 
         // If industry doesn't exist, create it with default values
         if (!industryInsight) {
-          const insights = await generateAIInsights(data.industry);
+          const insights = await generateAIInsights(validatedData.industry);
 
           industryInsight = await tx.industryInsight.create({
             data: {
-              industry: data.industry,
+              industry: validatedData.industry,
               ...insights,
               nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
             },
@@ -45,10 +54,10 @@ export async function updateUser(data) {
             id: user.id,
           },
           data: {
-            industry: data.industry,
-            experience: data.experience,
-            bio: data.bio,
-            skills: data.skills,
+            industry: validatedData.industry,
+            experience: validatedData.experience,
+            bio: validatedData.bio,
+            skills: validatedData.skills,
           },
         });
 

@@ -74,7 +74,7 @@ export default function VoiceChat({ sessionId, onNewSession }) {
             setDisplayText(response.reply);
             await speak(response.reply);
           } catch (error) {
-            console.error("Voice chat error:", error);
+            // Handle error silently
             setDisplayText("❌ Sorry, I couldn't process that. Please try again.");
             await speak("Sorry, I couldn't process that. Please try again.");
           }
@@ -82,7 +82,7 @@ export default function VoiceChat({ sessionId, onNewSession }) {
       };
 
       recognitionInstance.onerror = (event) => {
-        console.error("Speech recognition error:", event.error);
+        // Handle speech recognition error silently
         setIsListening(false);
         
         let errorMessage = "Sorry, I didn't catch that. Please try again.";
@@ -257,7 +257,7 @@ export default function VoiceChat({ sessionId, onNewSession }) {
       };
 
       utterance.onerror = (event) => {
-        console.error("Speech synthesis error:", event.error);
+        // Handle speech synthesis error silently
         setIsSpeaking(false);
         setDisplayText("❌ Speech synthesis failed. Please try again.");
       };

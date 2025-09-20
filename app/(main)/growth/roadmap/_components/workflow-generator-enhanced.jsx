@@ -122,7 +122,7 @@ const WorkflowGenerator = ({ roadmap }) => {
           setNodes(flowData.nodes);
           setEdges(flowData.edges);
         } catch (error) {
-          console.error('Error importing workflow:', error);
+          // Handle error silently
         }
       };
       reader.readAsText(file);

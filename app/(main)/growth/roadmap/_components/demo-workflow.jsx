@@ -232,7 +232,7 @@ const DemoWorkflow = () => {
           setNodes(flowData.nodes);
           setEdges(flowData.edges);
         } catch (error) {
-          console.error('Error parsing workflow file:', error);
+          // Handle error silently
         }
       };
       reader.readAsText(file);
