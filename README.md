@@ -27,23 +27,22 @@ An AI-powered Career Coaching Platform built with Next.js, Prisma, Tailwind, and
 
 ---
 
-## 📂 Project Structure
-
-NextStepAi/
-│── app/              # Next.js app routes
-│── components/       # Reusable UI components
-│── data/             # Static data (constants, mock data, etc.)
-│── hooks/            # Custom React hooks
-│── lib/              # Utilities & helpers
-│── prisma/           # Prisma schema & migrations
-│── public/           # Static assets (icons, images, etc.)
-│── styles/           # Global styles
-│── inngest/          # Inngest workflows & event handlers
-│── .env.example      # Example environment variables
-│── package.json      # Dependencies & scripts
-│── README.md         # Project documentation
-
-
+ ![This is my cool diagram](./new/1.png)
+           # Landing page of NextStepAi
+ ![This is my cool diagram](./new/2.png)
+   #Login with gmail using clerk
+ ![This is my cool diagram](./new/3.png)
+   #Industry Insights
+ ![This is my cool diagram](./new/4.png)
+     #Resume Builder
+ ![This is my cool diagram](./new/5.png)
+     #Cover Leter
+ ![This is my cool diagram](./new/6.png)
+    #Mock Quiz
+ ![This is my cool diagram](./new/7.png)
+    #ChatBot Using Gemeni Api
+ ![This is my cool diagram](./new/8.png)
+     #Carrier workflow generation using ReactFlow
 ---
 
 ## ⚙️ Installation & Setup
