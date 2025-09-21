@@ -27,22 +27,54 @@ An AI-powered Career Coaching Platform built with Next.js, Prisma, Tailwind, and
 
 ---
 
- ![This is my cool diagram](./new/1.png)
-           # Landing page of NextStepAi
- ![This is my cool diagram](./new/2.png)
-   #Login with gmail using clerk
- ![This is my cool diagram](./new/3.png)
-   #Industry Insights
- ![This is my cool diagram](./new/4.png)
-     #Resume Builder
- ![This is my cool diagram](./new/5.png)
-     #Cover Leter
- ![This is my cool diagram](./new/6.png)
-    #Mock Quiz
- ![This is my cool diagram](./new/7.png)
-    #ChatBot Using Gemeni Api
- ![This is my cool diagram](./new/8.png)
-     #Carrier workflow generation using ReactFlow
+# NextStepAi Features Overview
+
+## 1. Landing Page of NextStepAi
+![Landing Page](./new/1.png)
+The main landing page providing an overview of the platform and easy navigation to all features.
+
+---
+
+## 2. Login with Gmail using Clerk
+![Login with Gmail](./new/2.png)
+Secure authentication using Gmail integration via Clerk.
+
+---
+
+## 3. Industry Insights
+![Industry Insights](./new/3.png)
+Data-driven insights about various industries to help users make informed career decisions.
+
+---
+
+## 4. Resume Builder
+![Resume Builder](./new/4.png)
+Create professional resumes with templates and AI-generated suggestions.
+
+---
+
+## 5. Cover Letter Builder
+![Cover Letter Builder](./new/5.png)
+Generate tailored cover letters for job applications effortlessly.
+
+---
+
+## 6. Mock Quiz
+![Mock Quiz](./new/6.png)
+Interactive quizzes for skill assessment and interview preparation.
+
+---
+
+## 7. ChatBot Using Gemini API
+![ChatBot](./new/7.png)
+AI-powered conversational assistant integrated via Gemini API to answer career-related queries.
+
+---
+
+## 8. Career Workflow Generation using ReactFlow
+![Career Workflow](./new/8.png)
+Visualize career paths and workflows interactively using ReactFlow.
+
 ---
 
 ## ⚙️ Installation & Setup
